@@ -15,7 +15,7 @@ FOUNDATION_EXPORT const unsigned char WeChatPluginVersionString[];
 
 #pragma mark - 微信原始的部分类与方法
 
-@interface MMLoginOneClickViewController : NSObject
+@interface MMLoginOneClickViewController : NSViewController
 @property(nonatomic) NSTextField *descriptionLabel;
 - (void)onLoginButtonClicked:(id)arg1;
 @property(nonatomic) NSButton *loginButton;
@@ -114,7 +114,6 @@ FOUNDATION_EXPORT const unsigned char WeChatPluginVersionString[];
 @property(retain, nonatomic) WCContactData *m_contact;
 @end
 
-
 @protocol MMChatsTableCellViewDelegate <NSObject>
 @optional
 - (void)cellViewReloadData:(MMSessionInfo *)arg1;
@@ -124,9 +123,9 @@ FOUNDATION_EXPORT const unsigned char WeChatPluginVersionString[];
 @property(nonatomic) __weak id <MMChatsTableCellViewDelegate> delegate;
 @property(retain, nonatomic) MMSessionInfo *sessionInfo;
 - (void)menuWillOpen:(id)arg1;
-- (void)contextMenuSticky;
-- (void)contextMenuDelete;
-
+- (void)contextMenuSticky:(id)arg1;
+- (void)contextMenuDelete:(id)arg1;
+- (void)tableView:(NSTableView *)arg1 rowGotMouseDown:(long long)arg2;
 @end
 
 @interface MMSessionMgr : NSObject
@@ -144,17 +143,7 @@ FOUNDATION_EXPORT const unsigned char WeChatPluginVersionString[];
 - (void)sendLogoutCGIWithCompletion:(id)arg1;
 @end
 
-#pragma mark - 调用 NSSearchPathForDirectoriesInDomains 的一些方法
-@interface PathUtility : NSObject
-+ (id)getSysCachePath;
-+ (id)getSysDocumentPath;
-+ (id)getSysLibraryPath;
-@end
-
-@interface MemoryMappedKV : NSObject
-+ (id)mappedKVPathWithID:(id)arg1;
-@end
-
-@interface JTStatisticManager : NSObject
-@property(retain, nonatomic) NSString *statFilePath;
+@interface MMNotificationService : NSObject
+- (id)getNotificationContentWithMsgData:(id)arg1;
+- (void)userNotificationCenter:(id)arg1 didActivateNotification:(id)arg2;
 @end
